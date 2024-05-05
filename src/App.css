@@ -1,0 +1,38 @@
+body {
+    box-sizing: border-box;
+}
+
+#experience-select-small-label {
+    margin-top: 5px;
+}
+
+.filter-dropdown {
+    margin: 0px 10px 10px 0px;
+}
+
+
+.mask {
+    -webkit-mask-image: linear-gradient(black, transparent);
+    mask-image: linear-gradient(black, transparent);
+}
+
+.user-image {
+    filter: blur(2px);
+    margin-right: 6px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.btn-link{
+    text-decoration: none !important;
+    color: white;
+}
+
+.btn-link:hover{
+    color: white !important;
+}
+
+.job-container{
+    height: calc(100vh - 10px) !important;
+}

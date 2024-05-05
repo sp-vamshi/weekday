@@ -8,7 +8,10 @@ const store = configureStore({
 })
 
 const {dispatch}  = store;
-const useSelector = useAppSelector;
-const useDispatch = () => useAppDispatch();
+// const useSelector = useAppSelector;
+// const useDispatch = () => useAppDispatch();
 
-export {store, dispatch,useSelector, useDispatch}
+export {store, 
+    // dispatch
+    // ,useSelector, useDispatch
+}
