@@ -6,7 +6,6 @@ import {
   RoleDropDown,
   SalaryDropDown,
 } from "../filterControllers/Dropdowns";
-import { useSelector } from "react-redux";
 
 export default function FilterBar() {
   return (

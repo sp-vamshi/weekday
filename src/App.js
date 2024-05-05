@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchJobs,updateLoader } from "./redux/slices";
+import { FetchJobs, updateLoader } from "./redux/slices";
 import { Stack } from "@mui/material";
 import JobsContainer from "./components/JobsContainer";
 import FilterBar from "./components/FilterBar";
@@ -9,30 +9,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [page, setPage] = useState(0);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateLoader(true))
     dispatch(FetchJobs(page));
-
-  return () => {
-    dispatch(updateLoader(false))
-  }
   }, [page]);
 
-  function handleScroll(){
+  function handleScroll() {
     const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTopHeight = document.documentElement.scrollTop; 
+    const scrollTopHeight = document.documentElement.scrollTop;
     const windowInnerHeight = window.innerHeight;
 
-    if(windowInnerHeight+scrollTopHeight+1 >= scrollHeight){
-      setPage(page => page+1)
+    if (windowInnerHeight + scrollTopHeight + 1 >= scrollHeight) {
+      setPage((page) => page + 1);
     }
   }
 
   useEffect(() => {
-    window.addEventListener("scroll",handleScroll)
-  },[])
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <Stack

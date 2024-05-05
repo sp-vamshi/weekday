@@ -109,8 +109,8 @@ function ExperienceDropDown() {
         label="Experience"
         onChange={handleChange}
       >
-        <MenuItem value="">
-          <em>None</em>
+        <MenuItem value={0}>
+          <em>0</em>
         </MenuItem>
         {experienceList.map((experience) => (
           <MenuItem key={experience} value={experience}>

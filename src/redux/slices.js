@@ -43,6 +43,7 @@ export const slice = createSlice({
 
 export const FetchJobs = (pageNumber) => {
   return async (dispatch, getState) => {
+    dispatch(slice.actions.updateLoader(true))
     await axios
       .post("adhoc/getSampleJdJSON", {
         limit: 10,
@@ -88,6 +89,8 @@ export const FetchJobs = (pageNumber) => {
             jobLocations: locations,
           })
         );
+
+        dispatch(slice.actions.updateLoader(false))
       })
       .catch((error) => {
         console.log(error);
@@ -95,11 +98,31 @@ export const FetchJobs = (pageNumber) => {
   };
 };
 
+
 export const updateFilters = ({filterKey,newFilters}) => {
   return async (dispatch, getState) => {
     dispatch(slice.actions.updateSelectedFilters({filterKey, newFilters}))
   };
 };
+
+export const FilterJobs = () => {
+  return async (dispatch, getState) => {
+   
+    const jobs = getState().jobs;
+    const {company,minSalary,locations,experience,selectedRoles} = getState().selectedFilters
+    console.log(company,minSalary,locations,experience,selectedRoles)
+    // const filteredJobs = jobs.filter((job) => {
+
+      
+
+    // })
+
+
+
+  };
+};
+
+
 export const updateLoader = (loadingStatus) => {
   return async (dispatch, getState) => {
     dispatch(slice.actions.updateLoader(loadingStatus))
