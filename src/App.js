@@ -9,7 +9,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [page, setPage] = useState(0);
-
+  const totalJobs = useSelector((store) => store.totalJobs);
+  // const jobsList = useSelector((store) => store.jobs);
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +24,9 @@ function App() {
     const windowInnerHeight = window.innerHeight;
 
     if (windowInnerHeight + scrollTopHeight + 1 >= scrollHeight) {
-      setPage((page) => page + 1);
+      if (page * 10 <= totalJobs) {
+        setPage((page) => page + 1);
+      }
     }
   }
 

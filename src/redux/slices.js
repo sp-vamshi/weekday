@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   jobs: [],
+  totalJobs:0,
   filtersData: {
     jobRoles: [],
     jobLocations: [],
@@ -25,6 +26,7 @@ export const slice = createSlice({
   reducers: {
     updateJobs(state, action) {
       state.jobs = [...state.jobs, ...action.payload.jobs];
+      state.totalJobs = action.payload.totalJobs;
     },
     updateJobRoles(state, action) {
       state.filtersData.jobRoles = action.payload.jobRoles;
@@ -76,6 +78,7 @@ export const FetchJobs = (pageNumber) => {
         dispatch(
           slice.actions.updateJobs({
             jobs: response.data?.jdList,
+            totalJobs: response.data?.totalCount
           })
         );
 
@@ -102,23 +105,6 @@ export const FetchJobs = (pageNumber) => {
 export const updateFilters = ({filterKey,newFilters}) => {
   return async (dispatch, getState) => {
     dispatch(slice.actions.updateSelectedFilters({filterKey, newFilters}))
-  };
-};
-
-export const FilterJobs = () => {
-  return async (dispatch, getState) => {
-   
-    const jobs = getState().jobs;
-    const {company,minSalary,locations,experience,selectedRoles} = getState().selectedFilters
-    console.log(company,minSalary,locations,experience,selectedRoles)
-    // const filteredJobs = jobs.filter((job) => {
-
-      
-
-    // })
-
-
-
   };
 };
 

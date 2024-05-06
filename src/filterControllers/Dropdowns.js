@@ -49,7 +49,7 @@ function RoleDropDown() {
   };
 
   return (
-    <FormControl className="" sx={{ minWidth: 150 }}>
+    <FormControl className="flex-grow-1" sx={{ minWidth: 150 }}>
       <InputLabel id="demo-multiple-chip-label">Roles</InputLabel>
       <Select
         labelId="demo-multiple-chip-label"
@@ -99,7 +99,7 @@ function ExperienceDropDown() {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="medium">
+    <FormControl className="flex-grow-1" sx={{ m: 1, minWidth: 120 }} size="medium">
       <InputLabel id="experience-select-small-label">Experience</InputLabel>
       <Select
         labelId="experience-select-small-label"
@@ -142,7 +142,7 @@ function LocationDropDown() {
   };
 
   return (
-    <FormControl className="" sx={{ minWidth: 150 }}>
+    <FormControl className="flex-grow-1" sx={{ minWidth: 150 }}>
       <InputLabel id="demo-multiple-chip-label">Location</InputLabel>
       <Select
         labelId="demo-multiple-chip-label"
@@ -197,7 +197,7 @@ function SalaryDropDown() {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="medium">
+    <FormControl className="flex-grow-1" sx={{ m: 1, minWidth: 120 }} size="medium">
       <InputLabel id="salary-select-small-label">Min Salary</InputLabel>
       <Select
         labelId="salary-select-small-label"

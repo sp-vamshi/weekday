@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import JobCard from "./JobCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Stack } from "react-bootstrap";
-import { FilterJobs } from "../redux/slices";
 
 export default function JobsContainer() {
   const jobsList = useSelector((store) => store.jobs);
@@ -10,54 +9,25 @@ export default function JobsContainer() {
   const { selectedRoles, experience, locations, minSalary, company } =
     useSelector((store) => store.selectedFilters);
 
-  let filteredJobs = [];
+  let filteredJobs = jobsList.filter((job) => {
+    const roleMatch =
+      selectedRoles.length === 0 || selectedRoles.includes(job.jobRole);
+    const locationMatch =
+      locations.length === 0 || locations.includes(job.location);
+    const experienceMatch = job.minExp >= experience;
+    const companyMatch = job.companyName
+      .toLowerCase()
+      .includes(company.toLowerCase());
+    const salaryMatch = job.minJdSalary >= minSalary;
 
-  if (selectedRoles.length > 0 && locations.length > 0) {
-    jobsList.forEach((job) => {
-      if (
-        job.minJdSalary >= minSalary &&
-        job.minExp > experience &&
-        job.companyName.toLowerCase().includes(company.toLowerCase()) &&
-        selectedRoles.includes(job.jobRole) &&
-        locations.includes(job.location)
-      ) {
-        filteredJobs.push(job);
-      }
-    });
-  } else if (selectedRoles.length > 0 && locations.length === 0) {
-    jobsList.forEach((job) => {
-      if (
-        job.minJdSalary >= minSalary &&
-        job.minExp > experience &&
-        job.companyName.toLowerCase().includes(company.toLowerCase())
-        && selectedRoles.includes(job.jobRole)
-      ) {
-        filteredJobs.push(job );
-      }
-    });
-  } else if (locations.length > 0 && selectedRoles.length === 0) {
-    jobsList.forEach((job) => {
-      if (
-        job.minJdSalary >= minSalary &&
-        job.minExp > experience &&
-        job.companyName.toLowerCase().includes(company.toLowerCase())
-        && locations.includes(job.location)
-      ) {
-        filteredJobs.push(job );
-      }
-    });
-  } else {
-    jobsList.forEach((job) => {
-      if (
-        job.minJdSalary >= minSalary &&
-        job.minExp > experience &&
-        job.companyName.toLowerCase().includes(company.toLowerCase())
-      ) {
-        filteredJobs.push(job);
-      }
-    });
-  }
-
+    return (
+      roleMatch &&
+      locationMatch &&
+      experienceMatch &&
+      companyMatch &&
+      salaryMatch
+    );
+  });
 
   return (
     <>
@@ -71,13 +41,12 @@ export default function JobsContainer() {
             <JobCard
               key={job.jdUid}
               job={job}
-              isLast={idx === filteredJobs.length - 1}
             />
           );
         })}
       </Stack>
-      <Stack style={{ textAlign: "center",marginBottom:"100px" }}>
-        {isLoading && <span>Loading best jobs for you...</span>}
+      <Stack style={{ textAlign: "center", marginBottom: "100px" }}>
+        {/* {isLoading && <span>Loading best jobs for you...</span>} */}
       </Stack>
     </>
   );
